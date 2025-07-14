@@ -1,0 +1,40 @@
+openapi: 3.0.3
+
+info:
+  title: Weather Service API
+  version: 1.0.0
+  description: API for getting weather forecasts by location
+
+paths:
+  /weather:
+    get:
+      summary: Get weather forecast by latitude and longitude
+      parameters:
+        - in: query
+          name: lat
+          schema:
+            type: number
+          required: true
+          description: Latitude coordinate
+        - in: query
+          name: lon
+          schema:
+            type: number
+          required: true
+          description: Longitude coordinate
+      responses:
+        200:
+          description: Weather forecast result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  forecast:
+                    type: string
+                  temperatureCategory:
+                    type: string
+        400:
+          description: Missing or invalid parameters
+        500:
+          description: Internal Server Error
